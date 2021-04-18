@@ -95,6 +95,7 @@ Saat di production server, kita tinggal menjalankan function schema yang sudah k
 
 Okay, tadi kita telah membuat sebuah file bernama **userSchema.js** di dalam ./models/schema,
 silakan isi dengan code berikut.
+<small>./models/schema/userSchema.js</small>
 
 ```javascript
 const db = require("../connection");
@@ -120,6 +121,31 @@ createTableUsers().then((data) => {
 ```
 
 Bisa di lihat di code di atas, kita perintahkan KNEX untuk membuat sebuah tabel dengan nama **users** yang disi dengan kolom id, email, password, created_at.
+
+## Mengatur NODE CLI CODE untuk membuat schema database
+
+Schema yang sudah kita buat, harus di jalankan, kita bisa menjalankan function schema user yang sudah kita buat dengan bantuan node CLI.
+
+Silakan teaman teman buka file bernama **package.json** dan edit bagian **_script_** dengan code berikut :
+
+<small>./package.json</small>
+
+```json
+ "scripts": {
+    "dev": "nodemon server.js --watch",
+    "migration:user": "node ./models/schema/userSchema.js"
+  }
+```
+
+Bisa di lihat di atas, kita menambahkan syntax untuk node cli bernama **migration:user**, selanjutnya kita tinggal jalankan pada terminal / git bash kita.
+
+Buka terminal / gitbash dan masuk ke dalam folder kita, silakan jalankan syntax berikut :
+
+```bash
+npm run migration:user
+```
+
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/99wfzm2ubacah06xcjvd.png)
 
 # DBEAVER database management software
 
@@ -152,6 +178,8 @@ Perhatikan panel sebelah kiri, dan connection ke file sqlite kita sudah berhasil
 Silakan kita buat sebuah model untuk penghubung database dengan logic yang akan kita buat.
 
 Buka file bernama userModel.js pada ./models dan isikan dengan code dibawah ini :
+
+<small>./models/userModel.js</small>
 
 ```javascript
 const db = require("./connection");
